@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/light_primary_color"
+    android:gravity="center|start|center_horizontal"
+    android:theme="@style/AppTheme"
+    tools:context=".SettingActivity">
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:showDividers="middle"
+        android:divider="@drawable/divider"
+        android:dividerPadding="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/green"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_toStartOf="@+id/blue"
+            android:background="@drawable/circle_shape_green" />
+
+        <ImageView
+            android:id="@+id/blue"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_toStartOf="@+id/purple"
+            android:background="@drawable/circle_shape_blue" />
+
+        <ImageView
+            android:id="@+id/purple"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/circle_shape_purple" />
+
+    </LinearLayout>
+</RelativeLayout>
