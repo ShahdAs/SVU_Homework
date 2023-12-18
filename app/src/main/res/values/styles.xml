@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="AppTheme_purple" ></style>
+    <style name="AppTheme" ></style>
     <style name="AppTheme_purple" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="dark_primary_color">@color/dark_primary_color_purple</item>
         <item name="light_primary_color">@color/light_primary_color_purple</item>
