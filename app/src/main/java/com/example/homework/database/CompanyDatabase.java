@@ -34,18 +34,14 @@ public class CompanyDatabase extends DataBaseManager {
 //        super(context, name, version, openParams);
 //    }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String query =
-                "CREATE TABLE " + TABLE_NAME +
-                        " (" +
-                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NAME + " TEXT, " +
-                        COLUMN_LOCATION + " TEXT, " +
-                        COLUMN_PHONE_NUMBER + " TEXT, " +
-                        COLUMN_EMAIL + " TEXT)";
-        db.execSQL(query);
-    }
+    static          String query =
+            "CREATE TABLE " + TABLE_NAME +
+                    " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_NAME + " TEXT, " +
+                    COLUMN_LOCATION + " TEXT, " +
+                    COLUMN_PHONE_NUMBER + " TEXT, " +
+                    COLUMN_EMAIL + " TEXT)";
 
     public CompanyDatabase(@Nullable Context context) {
         super(context);

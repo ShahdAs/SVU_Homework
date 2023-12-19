@@ -56,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 openAgentListActivity();
             }
         });
+        myDates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMyDatesActivity();
+            }
+        });
 
 
         openCompanyActivity = findViewById(R.id.openCompanyActivity);
