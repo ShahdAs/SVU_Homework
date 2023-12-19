@@ -83,6 +83,8 @@ public class AgentDatabase extends SQLiteOpenHelper {
         Cursor cursor = null;
         if (db != null) {
             cursor = db.rawQuery(query, null);
+        }else {
+            System.out.println(query);
         }
         return cursor;
     }

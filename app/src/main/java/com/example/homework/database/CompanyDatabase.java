@@ -29,14 +29,6 @@ public class CompanyDatabase extends SQLiteOpenHelper {
         this.context = context;
     }
 
-//    public AgentDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
-//        super(context, name, factory, version, errorHandler);
-//    }
-//
-//    public AgentDatabase(@Nullable Context context, @Nullable String name, int version, @NonNull SQLiteDatabase.OpenParams openParams) {
-//        super(context, name, version, openParams);
-//    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query =
@@ -57,12 +49,12 @@ public class CompanyDatabase extends SQLiteOpenHelper {
 
     }
 
-    public void addCompany(String firstName, String lastName, String work, String phoneNumber, String email) {
+    public void addCompany(String name,  String location, String phoneNumber, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues company = new ContentValues();
 
-        company.put(COLUMN_NAME, firstName);
-        company.put(COLUMN_LOCATION, work);
+        company.put(COLUMN_NAME, name);
+        company.put(COLUMN_LOCATION, location);
         company.put(COLUMN_PHONE_NUMBER, phoneNumber);
         company.put(COLUMN_EMAIL, email);
         long result = db.insert(TABLE_NAME, null, company);
@@ -74,7 +66,7 @@ public class CompanyDatabase extends SQLiteOpenHelper {
 
     }
 
-    public Cursor readCmpany() {
+    public Cursor readCompany() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;

@@ -18,7 +18,7 @@ import com.example.homework.database.AgentDatabase;
 public class MainActivity extends AppCompatActivity {
     Button goButton;
     SharedPreferences sharedPreferences;
-    Button seeResult;
+    Button seeResult, openCompanyActivity;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        openCompanyActivity = findViewById(R.id.openCompanyActivity);
+        openCompanyActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCompanyListActivity();
+            }
+        });
+
+
 
     }
     public void openSettingActivity(){
@@ -65,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAgentListActivity(){
         Intent intent = new Intent(this, AgentListActivity.class);
+        startActivity(intent);
+    }
+
+    public  void  openCompanyListActivity(){
+        Intent intent = new Intent(this, CompanyListActivity.class);
         startActivity(intent);
     }
 }
