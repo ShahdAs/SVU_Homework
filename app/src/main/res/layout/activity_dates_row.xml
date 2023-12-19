@@ -17,8 +17,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_margin="4dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp">
 
             <TextView
                 android:id="@+id/agent_name_date_txt"
@@ -59,20 +59,20 @@
                 android:id="@+id/date_reminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="8dp"
                 android:text="0949750516"
                 android:textColor="?attr/primary_text"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/date_work_txt"
-                app:layout_constraintTop_toBottomOf="@+id/date_work_txt"
+                app:layout_constraintTop_toBottomOf="@+id/agent_name_date_txt"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/title_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="4dp"
                 android:text="shahd.alasfer@gmail.com"
                 android:textColor="?attr/primary_text"
                 android:textSize="15dp"

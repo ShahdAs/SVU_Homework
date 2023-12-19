@@ -21,6 +21,7 @@ public class MyDatesDatabase extends DataBaseManager {
     private static final String DATE_REMINDER = "date_reminder";
     private static final String DATE_WORK = "date_work";
     private static final String TITLE = "title";
+    private static final String DATE_IS_DONE = "date_is_done";
 
 
 
@@ -29,31 +30,33 @@ public class MyDatesDatabase extends DataBaseManager {
             "CREATE TABLE " + TABLE_NAME +
                     " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    TITLE + " TEXT," +
                     COMPANY_ID + " INTEGER, " +
                     AGENT_ID + " INTEGER, " +
                     DATE_REMINDER + " TEXT, " +
                     DATE_WORK + " TEXT, " +
-                    TITLE + " TEXT)";
+                    DATE_IS_DONE + " BOOLEAN)";
 
     public MyDatesDatabase(@Nullable Context context) {
         super(context);
     }
 
-    public void addDate(int agentId, int companyId, String dateWork, String dateReminder, String title) {
+    public void addDate(int agentId, int companyId, String dateWork, String dateReminder, String title, boolean dateIsDone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues dates = new ContentValues();
 
-        dates.put(AGENT_ID, agentId);
-        dates.put(COMPANY_ID, companyId);
-        dates.put(DATE_REMINDER, dateWork);
-        dates.put(DATE_WORK, dateWork);
         dates.put(TITLE, title);
+        dates.put(COMPANY_ID, companyId);
+        dates.put(AGENT_ID, agentId);
+        dates.put(DATE_REMINDER, dateReminder);
+        dates.put(DATE_WORK, dateWork);
+        dates.put(DATE_IS_DONE, dateIsDone);
         long result = db.insert(TABLE_NAME, null, dates);
-        if (result == -1) {
-            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-        }
+//        if (result == -1) {
+//            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 

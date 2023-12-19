@@ -56,13 +56,14 @@ public class CompanyListActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agent_list);
+        setContentView(R.layout.activity_company_list);
 
         db = new CompanyDatabase(CompanyListActivity.this);
         nameArray = new ArrayList<>();
         locationArray = new ArrayList<>();
         phoneNumberArray = new ArrayList<>();
         emailArray = new ArrayList<>();
+
         recyclerView = findViewById(R.id.Recycler_Company);
         openCompanyAddPopup = findViewById(R.id.openCompanyAddPopup);
 
@@ -99,25 +100,25 @@ public class CompanyListActivity extends AppCompatActivity {
     @SuppressLint("MissingInflatedId")
     void createPopUpWindow() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popUpView = inflater.inflate(R.layout.company_add_popup, null);
+        View popUpView2 = inflater.inflate(R.layout.company_add_popup, null);
 
         int width = ViewGroup.LayoutParams.MATCH_PARENT;
         int height = ViewGroup.LayoutParams.MATCH_PARENT;
         boolean focusable = true;
-        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        PopupWindow popupWindow2 = new PopupWindow(popUpView2, width, height, focusable);
         layout.post(new Runnable() {
                         @Override
                         public void run() {
-                            popupWindow.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
+                            popupWindow2.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
                         }
                     }
         );
 
-        name = popUpView.findViewById(R.id.editText_name_company);
-        location = popUpView.findViewById(R.id.editText_location_company);
-        phoneNumber = popUpView.findViewById(R.id.editText_phoneNumber_company);
-        email = popUpView.findViewById(R.id.editText_email_company);
-        saveCompanyData = popUpView.findViewById(R.id.saveToCompanyDatabase);
+        name = popUpView2.findViewById(R.id.editText_name_company);
+        location = popUpView2.findViewById(R.id.editText_location_company);
+        phoneNumber = popUpView2.findViewById(R.id.editText_phoneNumber_company);
+        email = popUpView2.findViewById(R.id.editText_email_company);
+        saveCompanyData = popUpView2.findViewById(R.id.saveToCompanyDatabase);
         saveCompanyData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,22 +127,23 @@ public class CompanyListActivity extends AppCompatActivity {
                         location.getText().toString().trim(),
                         phoneNumber.getText().toString().trim(),
                         email.getText().toString().trim());
-                popupWindow.dismiss();
+                popupWindow2.dismiss();
                 recreate();
+
             }
         });
 
-        closeCompanyPopup = popUpView.findViewById(R.id.closeAgentPopup);
+        closeCompanyPopup = popUpView2.findViewById(R.id.closeCompanyPopup);
         closeCompanyPopup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popupWindow.dismiss();
+                popupWindow2.dismiss();
             }
         });
-        popUpView.setOnTouchListener(new View.OnTouchListener() {
+        popUpView2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
+                popupWindow2.dismiss();
                 return true;
             }
         });

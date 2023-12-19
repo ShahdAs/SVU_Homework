@@ -56,11 +56,11 @@ public class CompanyDatabase extends DataBaseManager {
         company.put(COLUMN_PHONE_NUMBER, phoneNumber);
         company.put(COLUMN_EMAIL, email);
         long result = db.insert(TABLE_NAME, null, company);
-        if (result == -1) {
-            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-        }
+//        if (result == -1) {
+//            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 
@@ -73,5 +73,4 @@ public class CompanyDatabase extends DataBaseManager {
         }
         return cursor;
     }
-
 }
