@@ -72,6 +72,8 @@ public class AgentDatabase extends DataBaseManager {
         Cursor cursor = null;
         if (db != null) {
             cursor = db.rawQuery(query, null);
+        }else {
+            System.out.println(query);
         }
         return cursor;
     }

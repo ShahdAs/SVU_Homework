@@ -18,8 +18,8 @@ import com.example.homework.database.AgentDatabase;
 public class MainActivity extends AppCompatActivity {
     Button goButton;
     SharedPreferences sharedPreferences;
-    Button seeResult;
     Button myDates;
+    Button seeResult, openCompanyActivity;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -57,10 +57,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        myDates.setOnClickListener(new View.OnClickListener() {
+
+        openCompanyActivity = findViewById(R.id.openCompanyActivity);
+        openCompanyActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMyDatesActivity();
+                openCompanyListActivity();
             }
         });
 
@@ -79,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openMyDatesActivity(){
         Intent intent = new Intent(this, MyDatesActivity.class);
+        startActivity(intent);
+    }
+
+    public  void  openCompanyListActivity(){
+        Intent intent = new Intent(this, CompanyListActivity.class);
         startActivity(intent);
     }
 }
