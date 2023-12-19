@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="20dp"
+    android:gravity="center"
+    android:id="@+id/relativeDatePopup"
+    android:theme="@style/AppTheme">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/light_primary_color"
+        app:cardCornerRadius="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@drawable/divider"
+            android:dividerPadding="20dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:showDividers="middle">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:divider="@drawable/divider"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Title:" />
+
+                <EditText
+                    android:id="@+id/edt_txt_title"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:ems="0"
+                    android:inputType="textPersonName"
+                    android:text="first name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:divider="@drawable/divider"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Agent:" />
+
+                <EditText
+                    android:id="@+id/edt_txt_agent"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:ems="0"
+                    android:inputType="textPersonName"
+                    android:text="last name" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:divider="@drawable/divider"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Company:" />
+
+                <EditText
+                    android:id="@+id/edt_txt_company"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:ems="0"
+                    android:inputType="textPersonName"
+                    android:text="work" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:divider="@drawable/divider"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Date:" />
+
+                <EditText
+                    android:id="@+id/edt_txt_date"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:ems="0"
+                    android:inputType="textPersonName"
+                    android:text="Date" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:divider="@drawable/divider"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <TextView
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:text="Date Reminder:" />
+
+                <EditText
+                    android:id="@+id/edt_txt_date_reminder"
+                    android:layout_width="200dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:ems="0"
+                    android:inputType="textPersonName"
+                    android:text="date_reminder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:divider="@drawable/divider"
+                android:dividerPadding="0dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <Button
+                    android:id="@+id/saveDateToDatabase"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="0"
+                    android:text="Save"
+                    android:textColor="?attr/primary_color" />
+
+                <Button
+                    android:id="@+id/closeDatePopup"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:text="Close"
+                    android:textColor="?attr/primary_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

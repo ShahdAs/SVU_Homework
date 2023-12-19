@@ -27,6 +27,20 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".MyDatesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".DatesRowActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AgentRowActivity"
             android:exported="false">
             <meta-data

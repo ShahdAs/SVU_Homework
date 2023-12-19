@@ -11,12 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class AgentDatabase extends SQLiteOpenHelper {
+public class AgentDatabase extends DataBaseManager {
 
     private Context context;
     private static final String DATABASE_NAME = "my.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_NAME = "agent_table";
+    static final String TABLE_NAME = "agent_table";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_FIRSTNAME = "firstName";
     private static final String COLUMN_LASTNAME = "lastName";
@@ -25,10 +25,6 @@ public class AgentDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_EMAIL = "email";
 
 
-    public AgentDatabase(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
-    }
 
 //    public AgentDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
 //        super(context, name, factory, version, errorHandler);
@@ -38,25 +34,18 @@ public class AgentDatabase extends SQLiteOpenHelper {
 //        super(context, name, version, openParams);
 //    }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String query =
-                "CREATE TABLE " + TABLE_NAME +
-                        " (" +
-                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_FIRSTNAME + " TEXT, " +
-                        COLUMN_LASTNAME + " TEXT, " +
-                        COLUMN_WORK + " TEXT, " +
-                        COLUMN_PHONE_NUMBER + " TEXT, " +
-                        COLUMN_EMAIL + " TEXT)";
-        db.execSQL(query);
-    }
+   static String query =
+            "CREATE TABLE " + TABLE_NAME +
+                    " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_FIRSTNAME + " TEXT, " +
+                    COLUMN_LASTNAME + " TEXT, " +
+                    COLUMN_WORK + " TEXT, " +
+                    COLUMN_PHONE_NUMBER + " TEXT, " +
+                    COLUMN_EMAIL + " TEXT)";
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-
+    public AgentDatabase(@Nullable Context context) {
+        super(context);
     }
 
     public void addAgent(String firstName, String lastName, String work, String phoneNumber, String email) {

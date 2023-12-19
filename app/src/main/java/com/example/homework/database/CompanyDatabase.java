@@ -11,12 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class CompanyDatabase extends SQLiteOpenHelper {
+public class CompanyDatabase extends DataBaseManager {
 
     private Context context;
     private static final String DATABASE_NAME = "my.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_NAME = "company_table";
+     static final String TABLE_NAME = "company_table";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_LOCATION = "locaton";
@@ -24,10 +24,7 @@ public class CompanyDatabase extends SQLiteOpenHelper {
     private static final String COLUMN_EMAIL = "email";
 
 
-    public CompanyDatabase(@Nullable Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.context = context;
-    }
+
 
 //    public AgentDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
 //        super(context, name, factory, version, errorHandler);
@@ -37,24 +34,17 @@ public class CompanyDatabase extends SQLiteOpenHelper {
 //        super(context, name, version, openParams);
 //    }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String query =
-                "CREATE TABLE " + TABLE_NAME +
-                        " (" +
-                        COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_NAME + " TEXT, " +
-                        COLUMN_LOCATION + " TEXT, " +
-                        COLUMN_PHONE_NUMBER + " TEXT, " +
-                        COLUMN_EMAIL + " TEXT)";
-        db.execSQL(query);
-    }
+    static  String query =
+            "CREATE TABLE " + TABLE_NAME +
+                    " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_NAME + " TEXT, " +
+                    COLUMN_LOCATION + " TEXT, " +
+                    COLUMN_PHONE_NUMBER + " TEXT, " +
+                    COLUMN_EMAIL + " TEXT)";
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-
+    public CompanyDatabase(@Nullable Context context) {
+        super(context);
     }
 
     public void addCompany(String firstName, String lastName, String work, String phoneNumber, String email) {

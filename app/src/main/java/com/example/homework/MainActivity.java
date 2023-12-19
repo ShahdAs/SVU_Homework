@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     Button goButton;
     SharedPreferences sharedPreferences;
     Button seeResult;
+    Button myDates;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -48,10 +49,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         seeResult = findViewById(R.id.seeResult);
+        myDates = findViewById(R.id.myDatesBtn);
         seeResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openAgentListActivity();
+            }
+        });
+
+        myDates.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMyDatesActivity();
             }
         });
 
@@ -65,6 +74,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAgentListActivity(){
         Intent intent = new Intent(this, AgentListActivity.class);
+        startActivity(intent);
+    }
+
+    public void openMyDatesActivity(){
+        Intent intent = new Intent(this, MyDatesActivity.class);
         startActivity(intent);
     }
 }
