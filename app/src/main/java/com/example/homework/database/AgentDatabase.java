@@ -58,11 +58,11 @@ public class AgentDatabase extends DataBaseManager {
         agent.put(COLUMN_PHONE_NUMBER, phoneNumber);
         agent.put(COLUMN_EMAIL, email);
         long result = db.insert(TABLE_NAME, null, agent);
-        if (result == -1) {
-            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-        }
+//        if (result == -1) {
+//            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+//        }
 
     }
 
