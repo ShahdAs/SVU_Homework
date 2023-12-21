@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.homework.adapter.CompanyAdapter;
 import com.example.homework.database.CompanyDatabase;
+import com.example.homework.database.model.CompanyModel;
 
 import java.util.ArrayList;
 
@@ -84,16 +85,11 @@ public class CompanyListActivity extends AppCompatActivity {
     }
 
     void storeDataInArray() {
-        Cursor cursor = db.readCompany();
-        if (cursor.getCount() == 0) {
-            Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
-        } else {
-            while (cursor.moveToNext()) {
-                nameArray.add(cursor.getString(1));
-                locationArray.add(cursor.getString(2));
-                phoneNumberArray.add(cursor.getString(3));
-                emailArray.add(cursor.getString(4));
-            }
+        for(CompanyModel companyModel : db.readCompany()) {
+            nameArray.add(companyModel.getName());
+            locationArray.add(companyModel.getLocation());
+            phoneNumberArray.add(companyModel.getPhoneNumber());
+            emailArray.add(companyModel.getEmail());
         }
     }
 

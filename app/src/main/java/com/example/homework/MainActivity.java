@@ -1,25 +1,42 @@
 package com.example.homework;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
+import com.example.homework.adapter.MyDateCardAdapter;
 import com.example.homework.database.AgentDatabase;
+import com.example.homework.database.CompanyDatabase;
+import com.example.homework.database.MyDatesDatabase;
+import com.example.homework.database.model.AgentModel;
+import com.example.homework.database.model.CompanyModel;
+import com.example.homework.database.model.DateModel;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     Button goButton;
     SharedPreferences sharedPreferences;
     Button myDates;
     Button seeResult, openCompanyActivity;
+    MyDatesDatabase myDatesDatabase;
+    AgentDatabase agentDatabase;
+    CompanyDatabase companyDatabase;
+
+    ArrayList<String>  dateWorkArray,dateDelayedArray, dateReminderArray,  titleArray, agentFirstNameArray,agentLastNameArray, companyNameArray;
+    ArrayList<Integer> agentIdArray, companyIdArray;
+    ArrayList<Boolean> dateIsDoneArray, dateIsDelayed;
+
+    MyDateCardAdapter myDateCardAdapter;
+    RecyclerView recyclerView;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,6 +55,57 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        recyclerView = findViewById(R.id.recyclerView_mainActivity);
+        dateWorkArray = new ArrayList<>();
+        dateReminderArray = new ArrayList<>();
+        titleArray = new ArrayList<>();
+        agentIdArray = new ArrayList<>();
+        companyIdArray = new ArrayList<>();
+        dateIsDoneArray = new ArrayList<>();
+        dateIsDelayed = new ArrayList<>();
+        dateDelayedArray = new ArrayList<>();
+        agentFirstNameArray = new ArrayList<>();
+        agentLastNameArray = new ArrayList<>();
+        companyNameArray = new ArrayList<>();
+
+        myDatesDatabase = new MyDatesDatabase(MainActivity.this);
+        agentDatabase = new AgentDatabase(MainActivity.this);
+        companyDatabase = new CompanyDatabase(MainActivity.this);
+
+        for (DateModel dateModel: myDatesDatabase.readDates()){
+            AgentModel agentModel = agentDatabase.readAgentById(dateModel.getAgentId());
+            CompanyModel companyModel = companyDatabase.readCompanyById(dateModel.getCompanyId());
+
+            dateWorkArray.add(dateModel.getDateWork());
+            dateReminderArray.add(dateModel.getDateReminder());
+            titleArray.add(dateModel.getTitle());
+            agentIdArray.add(dateModel.getAgentId());
+            companyIdArray.add(dateModel.getCompanyId());
+            dateIsDoneArray.add(dateModel.getDateIsDone());
+            dateIsDelayed.add(dateModel.getDateIsDelayed());
+            dateDelayedArray.add(dateModel.getDateDelayed());
+            agentFirstNameArray.add(agentModel.getFirstName());
+            agentLastNameArray.add(agentModel.getLastName());
+            companyNameArray.add(companyModel.getName());
+        }
+
+
+
+
+        myDateCardAdapter = new MyDateCardAdapter(MainActivity.this,
+                agentFirstNameArray,
+                agentLastNameArray,
+                companyNameArray,
+                dateWorkArray,
+                dateReminderArray,
+                titleArray,
+                dateIsDoneArray,
+                dateIsDelayed,
+                dateDelayedArray
+        );
+        recyclerView.setAdapter(myDateCardAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
 
         goButton = findViewById(R.id.goButton);
@@ -75,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
     public void openSettingActivity(){
         Intent intent = new Intent(this, SettingActivity.class);
         startActivity(intent);

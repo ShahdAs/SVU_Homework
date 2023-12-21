@@ -9,6 +9,8 @@
     tools:context=".MainActivity">
 
 
+
+
     <!--    <include-->
     <!--        layout="@layout/custom_button"-->
     <!--        android:id="@+id/goButton"-->
@@ -24,6 +26,7 @@
         android:dividerPadding="20dp"
         android:orientation="vertical"
         android:showDividers="middle">
+
 
         <Button
             android:id="@+id/goButton"
@@ -63,6 +66,14 @@
             android:layout_marginEnd="112dp"
             android:text="My Dates"
             android:textColor="?attr/primary_color" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_mainActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
 
     </LinearLayout>
 

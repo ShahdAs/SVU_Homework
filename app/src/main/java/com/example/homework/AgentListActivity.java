@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.homework.adapter.AgentAdapter;
 import com.example.homework.database.AgentDatabase;
+import com.example.homework.database.model.AgentModel;
 
 import java.util.ArrayList;
 
@@ -83,16 +84,16 @@ public class AgentListActivity extends AppCompatActivity {
     }
 
     void storeDataInArray() {
-        Cursor cursor = db.readAgent();
-        if (cursor.getCount() == 0) {
+        ArrayList<AgentModel> agentModels = db.readAgent();
+        if (agentModels.size() == 0) {
             Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
         } else {
-            while (cursor.moveToNext()) {
-                firstNameArray.add(cursor.getString(1));
-                lastNameArray.add(cursor.getString(2));
-                workArray.add(cursor.getString(3));
-                phoneNumberArray.add(cursor.getString(4));
-                emailArray.add(cursor.getString(5));
+            for(AgentModel agentModel : db.readAgent()) {
+                firstNameArray.add(agentModel.getFirstName());
+                lastNameArray.add(agentModel.getLastName());
+                workArray.add(agentModel.getWork());
+                phoneNumberArray.add(agentModel.getPhoneNumber());
+                emailArray.add(agentModel.getEmail());
             }
         }
     }
