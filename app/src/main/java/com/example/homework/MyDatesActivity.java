@@ -35,7 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-public class DatesListActivity extends AppCompatActivity {
+public class MyDatesActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyDatesDatabase db;
     AgentDatabase agentDatabase;
@@ -77,9 +77,9 @@ public class DatesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dates_list);
 
 
-        db = new MyDatesDatabase(DatesListActivity.this);
-        agentDatabase = new AgentDatabase(DatesListActivity.this);
-        companyDatabase = new CompanyDatabase(DatesListActivity.this);
+        db = new MyDatesDatabase(MyDatesActivity.this);
+        agentDatabase = new AgentDatabase(MyDatesActivity.this);
+        companyDatabase = new CompanyDatabase(MyDatesActivity.this);
         titleArray = new ArrayList<>();
         dateAgentIdArray = new ArrayList<>();
         dateCompanyIdArray = new ArrayList<>();
@@ -101,12 +101,12 @@ public class DatesListActivity extends AppCompatActivity {
 
         storeDataInArray();
 
-        dateAdapter = new DatesAdapter(DatesListActivity.this, dateAgentIdArray, dateCompanyIdArray, dateWorkArray, dateReminderArray, titleArray
+        dateAdapter = new DatesAdapter(MyDatesActivity.this, dateAgentIdArray, dateCompanyIdArray, dateWorkArray, dateReminderArray, titleArray
 //                , dateIsDoneArray
         );
 
         recyclerView.setAdapter(dateAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(DatesListActivity.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(MyDatesActivity.this));
         layout = findViewById(R.id.relativeDateList);
         openDatesAddPopup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +163,7 @@ public class DatesListActivity extends AppCompatActivity {
                 agentLastNameArray.add(agentModel.getLastName());
                 agentId.add(agentModel.getId());
             }
-            agentSpinnerAdapter = new AgentSpinnerAdapter(DatesListActivity.this, agentFirstNameArray, agentLastNameArray);
+            agentSpinnerAdapter = new AgentSpinnerAdapter(MyDatesActivity.this, agentFirstNameArray, agentLastNameArray);
             agentSpinner.setAdapter(agentSpinnerAdapter);
 
 
@@ -183,8 +183,7 @@ public class DatesListActivity extends AppCompatActivity {
             saveData.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MyDatesDatabase myDB = new MyDatesDatabase(DatesListActivity.this);
-//                String query = "SELECT _id FROM company_table WHERE name IS " + companyName;
+                    MyDatesDatabase myDB = new MyDatesDatabase(MyDatesActivity.this);
 
                     myDB.addDate(agentId.get(agentSpinner.getSelectedItemPosition()),
                             companyId.get(companySpinner.getSelectedItemPosition()),

@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.homework.adapter.AgentAdapter;
-import com.example.homework.adapter.DatesAdapter;
 import com.example.homework.adapter.MyDateCardAdapter;
 import com.example.homework.database.AgentDatabase;
 import com.example.homework.database.CompanyDatabase;
@@ -159,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openMyDatesActivity(){
-        Intent intent = new Intent(this, DatesListActivity.class);
+        Intent intent = new Intent(this, MyDatesActivity.class);
         startActivity(intent);
     }
 

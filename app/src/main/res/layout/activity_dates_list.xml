@@ -8,7 +8,7 @@
     android:id="@+id/relativeDateList"
     android:gravity="center|start|center_horizontal"
     android:theme="@style/AppTheme"
-    tools:context=".DatesListActivity">
+    tools:context=".MyDatesActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
