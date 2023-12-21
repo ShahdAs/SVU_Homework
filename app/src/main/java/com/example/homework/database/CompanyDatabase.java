@@ -11,19 +11,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.homework.database.model.CompanyModel;
+
+import java.util.ArrayList;
+
 public class CompanyDatabase extends DataBaseManager {
 
     private Context context;
     private static final String DATABASE_NAME = "my.db";
     private static final int DATABASE_VERSION = 1;
-     static final String TABLE_NAME = "company_table";
+    static final String TABLE_NAME = "company_table";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_NAME = "name";
     private static final String COLUMN_LOCATION = "locaton";
     private static final String COLUMN_PHONE_NUMBER = "phoneNumber";
     private static final String COLUMN_EMAIL = "email";
-
-
 
 
 //    public AgentDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
@@ -34,7 +36,7 @@ public class CompanyDatabase extends DataBaseManager {
 //        super(context, name, version, openParams);
 //    }
 
-    static          String query =
+    static String query =
             "CREATE TABLE " + TABLE_NAME +
                     " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -47,7 +49,7 @@ public class CompanyDatabase extends DataBaseManager {
         super(context);
     }
 
-    public void addCompany(String name,  String location, String phoneNumber, String email) {
+    public void addCompany(String name, String location, String phoneNumber, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues company = new ContentValues();
 
@@ -64,13 +66,47 @@ public class CompanyDatabase extends DataBaseManager {
 
     }
 
-    public Cursor readCompany() {
+    public ArrayList<CompanyModel> readCompany() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<CompanyModel> companyModels = new ArrayList<>();
         Cursor cursor = null;
         if (db != null) {
             cursor = db.rawQuery(query, null);
+            while (cursor.moveToNext()) {
+                CompanyModel companyModel = new CompanyModel(
+                        (cursor.getInt(0)),
+                        (cursor.getString(1)),
+                        (cursor.getString(2)),
+                        (cursor.getString(3)),
+                        (cursor.getString(4))
+                );
+                companyModels.add(companyModel);
+            }
         }
-        return cursor;
+        return companyModels;
+    }
+
+
+    public CompanyModel readCompanyById(Integer id) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID  + " = " + id ;
+        SQLiteDatabase db = this.getReadableDatabase();
+        CompanyModel companyModel;
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+                companyModel = new CompanyModel(
+                        (cursor.getInt(0)),
+                        (cursor.getString(1)),
+                        (cursor.getString(2)),
+                        (cursor.getString(3)),
+                        (cursor.getString(4))
+                );
+        }
+        else {
+            companyModel = null;
+        }
+        return companyModel;
     }
 }

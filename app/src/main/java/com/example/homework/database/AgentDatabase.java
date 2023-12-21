@@ -11,6 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.homework.database.model.AgentModel;
+
+import java.util.ArrayList;
+
 public class AgentDatabase extends DataBaseManager {
 
     private Context context;
@@ -25,7 +29,6 @@ public class AgentDatabase extends DataBaseManager {
     private static final String COLUMN_EMAIL = "email";
 
 
-
 //    public AgentDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version, @Nullable DatabaseErrorHandler errorHandler) {
 //        super(context, name, factory, version, errorHandler);
 //    }
@@ -34,7 +37,7 @@ public class AgentDatabase extends DataBaseManager {
 //        super(context, name, version, openParams);
 //    }
 
-   static String query =
+    static String query =
             "CREATE TABLE " + TABLE_NAME +
                     " (" +
                     COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -66,16 +69,50 @@ public class AgentDatabase extends DataBaseManager {
 
     }
 
-    public Cursor readAgent() {
+    public ArrayList<AgentModel> readAgent() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
+        ArrayList<AgentModel> agentModels = new ArrayList<>();
         if (db != null) {
             cursor = db.rawQuery(query, null);
-        }else {
+            while (cursor.moveToNext()) {
+                AgentModel agentModel = new AgentModel(
+                        (cursor.getInt(0)),
+                        (cursor.getString(1)),
+                        (cursor.getString(2)),
+                        (cursor.getString(3)),
+                        (cursor.getString(4)),
+                        (cursor.getString(5)));
+                agentModels.add(agentModel);
+            }
+        } else {
             System.out.println(query);
         }
-        return cursor;
+        return agentModels;
+    }
+
+
+    public AgentModel readAgentById(Integer id) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        AgentModel agentModel;
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+            agentModel = new AgentModel(
+                    (cursor.getInt(0)),
+                    (cursor.getString(1)),
+                    (cursor.getString(2)),
+                    (cursor.getString(3)),
+                    (cursor.getString(4)),
+                    (cursor.getString(5)));
+
+        } else {
+            agentModel = null;
+        }
+        return agentModel;
     }
 
 }
