@@ -104,7 +104,6 @@ public class MyDatesActivity extends AppCompatActivity {
 
 
 
-
         storeDataInArray();
 
         dateAdapter = new DatesAdapter(MyDatesActivity.this, dateAgentIdArray, dateCompanyIdArray, dateWorkArray, dateReminderArray, titleArray
@@ -161,7 +160,26 @@ public class MyDatesActivity extends AppCompatActivity {
             dateWork = popUpView3.findViewById(R.id.edt_txt_date);
             dateReminder = popUpView3.findViewById(R.id.edt_txt_date_reminder);
             title = popUpView3.findViewById(R.id.edt_txt_title);
+            dateWork.setFocusable(false);
+            dateReminder.setFocusable(false);
+            dateWork.setOnClickListener(new View.OnClickListener(){
 
+                @Override
+                public void onClick(View v) {
+                    DatePickerFragment newFragment = new DatePickerFragment(dateWork);
+
+                    newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
+                }
+            });
+            dateReminder.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    DatePickerFragment newFragment = new DatePickerFragment(dateReminder);
+
+                    newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
+                }
+            });
 
             agentSpinner = popUpView3.findViewById(R.id.agent_spinner);
             for (AgentModel agentModel : agentDatabase.readAgent()) {
@@ -190,62 +208,64 @@ public class MyDatesActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     MyDatesDatabase myDB = new MyDatesDatabase(MyDatesActivity.this);
-        dateWork = popUpView3.findViewById(R.id.edt_txt_date);
-        dateReminder = popUpView3.findViewById(R.id.edt_txt_date_reminder);
-        title = popUpView3.findViewById(R.id.edt_txt_title);
-        saveData = popUpView3.findViewById(R.id.saveDateToDatabase);
-        dateWork.setFocusable(false);
-        dateReminder.setFocusable(false);
-        dateWork.setOnClickListener(new View.OnClickListener(){
+                    dateWork = popUpView3.findViewById(R.id.edt_txt_date);
+                    dateReminder = popUpView3.findViewById(R.id.edt_txt_date_reminder);
+                    title = popUpView3.findViewById(R.id.edt_txt_title);
+                    saveData = popUpView3.findViewById(R.id.saveDateToDatabase);
+                    dateWork.setFocusable(false);
+                    dateReminder.setFocusable(false);
+                    dateWork.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                DatePickerFragment newFragment = new DatePickerFragment(dateWork);
+                        @Override
+                        public void onClick(View v) {
+                            DatePickerFragment newFragment = new DatePickerFragment(dateWork);
 
-                newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
-            }
-        });
-        dateReminder.setOnClickListener(new View.OnClickListener(){
+                            newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
+                        }
+                    });
+                    dateReminder.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                DatePickerFragment newFragment = new DatePickerFragment(dateReminder);
+                        @Override
+                        public void onClick(View v) {
+                            DatePickerFragment newFragment = new DatePickerFragment(dateReminder);
 
-                newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
-            }
-        });
-        saveData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyDatesDatabase myDB = new MyDatesDatabase(MyDatesActivity.this);
+                            newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
+                        }
+                    });
+                    saveData.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            MyDatesDatabase myDB = new MyDatesDatabase(MyDatesActivity.this);
 //                String query = "SELECT _id FROM company_table WHERE name IS " + companyName;
 
-                    myDB.addDate(agentId.get(agentSpinner.getSelectedItemPosition()),
-                            companyId.get(companySpinner.getSelectedItemPosition()),
-                            dateWork.getText().toString().trim(),
-                            dateReminder.getText().toString().trim(),
-                            title.getText().toString().trim()
-                    );
-                    popupWindow3.dismiss();
-                    recreate();
-                }
-            });
+                            myDB.addDate(agentId.get(agentSpinner.getSelectedItemPosition()),
+                                    companyId.get(companySpinner.getSelectedItemPosition()),
+                                    dateWork.getText().toString().trim(),
+                                    dateReminder.getText().toString().trim(),
+                                    title.getText().toString().trim()
+                            );
+                            popupWindow3.dismiss();
+                            recreate();
+                        }
+                    });
 
 
-            close = popUpView3.findViewById(R.id.closeDatePopup);
-            close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    popupWindow3.dismiss();
-                }
-            });
-            popUpView3.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    popupWindow3.dismiss();
-                    return true;
-                }
-            });
+                    close = popUpView3.findViewById(R.id.closeDatePopup);
+                    close.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            popupWindow3.dismiss();
+                        }
+                    });
+                    popUpView3.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            popupWindow3.dismiss();
+                            return true;
+                        }
+                    });
 
+                }
+            });
         }
-    }
+}
