@@ -128,8 +128,9 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:ems="0"
+                    android:editable="false"
                     android:inputType="textPersonName"
-                    android:text="Date" />
+                    android:text="Select a date..." />
             </LinearLayout>
 
             <LinearLayout
@@ -154,7 +155,7 @@
                     android:layout_weight="1"
                     android:ems="0"
                     android:inputType="textPersonName"
-                    android:text="date_reminder" />
+                    android:text="Select a date..." />
             </LinearLayout>
 
             <LinearLayout

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -44,19 +45,16 @@ public class MyDatesDatabase extends DataBaseManager {
     public void addDate(int agentId, int companyId, String dateWork, String dateReminder, String title, boolean dateIsDone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues dates = new ContentValues();
+        dates.put(COMPANY_ID, companyId);
 
         dates.put(TITLE, title);
-        dates.put(COMPANY_ID, companyId);
         dates.put(AGENT_ID, agentId);
         dates.put(DATE_REMINDER, dateReminder);
         dates.put(DATE_WORK, dateWork);
         dates.put(DATE_IS_DONE, dateIsDone);
         long result = db.insert(TABLE_NAME, null, dates);
-//        if (result == -1) {
-//            Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
-//        }
+
+
 
     }
 

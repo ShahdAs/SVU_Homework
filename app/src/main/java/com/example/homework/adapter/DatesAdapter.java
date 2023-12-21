@@ -16,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 public class DatesAdapter extends RecyclerView.Adapter <DatesAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<String>  dateWorkArray, dateReminderArray, titleArray;
-    private  ArrayList<Integer> agentIdArray, companyIdArray;
+    private  ArrayList<String> agentIdArray, companyIdArray;
 //    private  ArrayList<Boolean> dateIsDoneArray;
 
 
-    public DatesAdapter(Context context, ArrayList<Integer> agentId, ArrayList<Integer> companyId, ArrayList<String> dateWork, ArrayList<String> dateReminder, ArrayList<String> title
+    public DatesAdapter(Context context, ArrayList<String> agentId, ArrayList<String> companyId, ArrayList<String> dateWork, ArrayList<String> dateReminder, ArrayList<String> title
 //            , ArrayList<Boolean> dateIsDone
     ){
         this.context =context;

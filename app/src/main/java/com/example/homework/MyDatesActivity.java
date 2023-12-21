@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -27,6 +28,7 @@ import com.example.homework.adapter.DatesAdapter;
 import com.example.homework.database.AgentDatabase;
 import com.example.homework.database.CompanyDatabase;
 import com.example.homework.database.MyDatesDatabase;
+import com.example.homework.services.DatePickerFragment;
 
 import java.util.ArrayList;
 
@@ -51,7 +53,7 @@ public class MyDatesActivity extends AppCompatActivity implements AdapterView.On
 
     ArrayList<String> dateWorkArray, dateReminderArray, titleArray, agentFirstNameArray, agentLastNameArray, companyNameArray;
     ArrayList<Boolean> dateIsDoneArray;
-    ArrayList<Integer> companyArray, agentArray;
+    ArrayList<Integer> companyArray, agentArray,agentIdArray,companyIdArray;
 
 
     Spinner agentSpinner, companySpinner;
@@ -87,12 +89,31 @@ public class MyDatesActivity extends AppCompatActivity implements AdapterView.On
         companyNameArray = new ArrayList<>();
         agentFirstNameArray = new ArrayList<>();
         agentLastNameArray = new ArrayList<>();
+        agentIdArray = new ArrayList<>();
+        companyIdArray = new ArrayList<>();
         recyclerView = findViewById(R.id.Recycler_Date);
         openDatesAddPopup = findViewById(R.id.openDateAddPopup);
+        Cursor cursor1 = companyDatabase.readCompany();
+        while (cursor1.moveToNext()){
+            companyNameArray.add(cursor1.getString(1));
+            companyIdArray.add(cursor1.getInt(0));
 
+        }
+        Cursor cursor = agentDatabase.readAgent();
+        while (cursor.moveToNext()) {
+            agentFirstNameArray.add(cursor.getString(1));
+            agentLastNameArray.add(cursor.getString(2));
+            agentIdArray.add(cursor.getInt(0));
+        }
         storeDataInArray();
+        final ArrayList<String> comapnyyNames = new ArrayList<String>();
+        final ArrayList<String> agenttNames = new ArrayList<String>();
+        for(int i = 0; i < companyArray.size();i++){
+            comapnyyNames.add(companyNameArray.get(companyArray.get(i)));
+            agenttNames.add(agentFirstNameArray.get(agentArray.get(i)) + " " + agentLastNameArray.get(agentArray.get(i)));
+        }
 
-        dateAdapter = new DatesAdapter(MyDatesActivity.this, agentArray, companyArray, dateWorkArray, dateReminderArray, titleArray
+        dateAdapter = new DatesAdapter(MyDatesActivity.this, agenttNames, comapnyyNames, dateWorkArray, dateReminderArray, titleArray
 //                , dateIsDoneArray
         );
 
@@ -117,11 +138,11 @@ public class MyDatesActivity extends AppCompatActivity implements AdapterView.On
             Toast.makeText(this, "no data", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                titleArray.add(cursor.getString(1));
-                companyArray.add(cursor.getInt(2));
-                agentArray.add(cursor.getInt(3));
                 dateReminderArray.add(cursor.getString(4));
                 dateWorkArray.add(cursor.getString(5));
+                companyArray.add(cursor.getInt(2));
+                agentArray.add(cursor.getInt(3));
+                titleArray.add(cursor.getString(1));
                 Boolean value = cursor.getInt(6) > 0;
                 dateIsDoneArray.add(value);
             }
@@ -150,14 +171,37 @@ public class MyDatesActivity extends AppCompatActivity implements AdapterView.On
         dateReminder = popUpView3.findViewById(R.id.edt_txt_date_reminder);
         title = popUpView3.findViewById(R.id.edt_txt_title);
         saveData = popUpView3.findViewById(R.id.saveDateToDatabase);
+        dateWork.setFocusable(false);
+        dateReminder.setFocusable(false);
+        dateWork.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment newFragment = new DatePickerFragment(dateWork);
+
+                newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
+            }
+        });
+        dateReminder.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment newFragment = new DatePickerFragment(dateReminder);
+
+                newFragment.show(MyDatesActivity.this.getSupportFragmentManager(), "datePicker");
+            }
+        });
         saveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyDatesDatabase myDB = new MyDatesDatabase(MyDatesActivity.this);
 //                String query = "SELECT _id FROM company_table WHERE name IS " + companyName;
 
-                myDB.addDate(0,
-                        0,
+                int agentIndex = agentSpinner.getSelectedItemPosition();
+                int companyIndex = companySpinner.getSelectedItemPosition();
+
+                myDB.addDate(agentIndex,
+                        companyIndex,
                         dateWork.getText().toString().trim(),
                         dateReminder.getText().toString().trim(),
                         title.getText().toString().trim(),
@@ -170,21 +214,14 @@ public class MyDatesActivity extends AppCompatActivity implements AdapterView.On
 
 
         agentSpinner = popUpView3.findViewById(R.id.agent_spinner);
-        Cursor cursor = agentDatabase.readAgent();
-        while (cursor.moveToNext()) {
-            agentFirstNameArray.add(cursor.getString(1));
-            agentLastNameArray.add(cursor.getString(2));
-        }
+
         agentSpinnerAdapter = new AgentSpinnerAdapter(MyDatesActivity.this, agentFirstNameArray, agentLastNameArray);
         agentSpinner.setAdapter(agentSpinnerAdapter);
 
         agentSpinner.setOnItemSelectedListener(this);
 
         companySpinner = popUpView3.findViewById(R.id.company_spinner);
-        Cursor cursor1 = companyDatabase.readCompany();
-        while (cursor1.moveToNext()){
-            companyNameArray.add(cursor1.getString(1));
-        }
+
         ArrayAdapter companyArrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, companyNameArray);
         companyArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         companySpinner.setAdapter(companyArrayAdapter);
